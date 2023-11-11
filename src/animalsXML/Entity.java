@@ -1,7 +1,13 @@
+package animalsXML;
+
+import myLibrary.console.Console;
+
+import java.util.UUID;
+
 public class Entity {
-    private int id;
+    private UUID id;
     private String type;
-    private int price;
+    private double price;
     private String kind;
     private String description;
     private String subspecies;
@@ -18,7 +24,7 @@ public class Entity {
         return kind;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
@@ -31,14 +37,14 @@ public class Entity {
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        this.description = description.replaceAll("`","\n");
     }
 
     public void setKind(String kind) {
         this.kind = kind;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
@@ -48,16 +54,17 @@ public class Entity {
 
     @Override
     public String toString() {
-        return "Животное [id=" + getId() + ", вид: " + getKind() + ", подвид: " + getSubspecies() +
-                ", семейство: " + getType() + ", цена: " + getPrice() + "]\nОписание: "+getDescription();
+        Console.log( "id=" + getId()+"\nЖивотное [вид: " + getKind() + ", подвид: " + getSubspecies() +
+                ", семейство: " + getType() + ", цена: " + getPrice() + "]\nОписание: "+getDescription());
+        return null;
     }
 
-    public int getId() {
-        return id;
+    public String getId() {
+        return id.toString();
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(String id) {
+        this.id = UUID.fromString(id);
     }
 
 }

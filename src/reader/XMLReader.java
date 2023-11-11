@@ -1,5 +1,7 @@
-package animalsXML;
+package reader;
 
+import animalsXML.Entity;
+import myLibrary.console.Console;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -32,20 +34,18 @@ public class XMLReader {
     }
 
     private static List<Entity> getAnimalData(Document document) {
-
+        List<Entity> entities = null;
         NodeList list = document.getElementsByTagName("animal");
-        int length = list.getLength();
-        List<Entity> employees = new ArrayList<>();
-        for (int i = 0; i < length; i++) {
+        entities = new ArrayList<>();
+        for (int i = 0; i < list.getLength(); i++) {
             Node node = list.item(i);
             if (node.getNodeType() == Node.ELEMENT_NODE) {
                 Element element = (Element) node;
                 Entity animal = getAnimal(element);
-                employees.add(animal);
+                entities.add(animal);
             }
         }
-
-        return employees;
+        return entities;
     }
 
     private static Entity getAnimal(Element element) {
